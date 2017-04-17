@@ -1,0 +1,52 @@
+[sudo] npm install -g @angular/cli
+
+ng new my-first-app
+
+ng serve
+
+http://localhost:4200
+
+
+////////[app.component.html]///////////
+<input type="text" [(ngModel)]="name">
+<h1>
+  {{name}}
+</h1>
+///////////////////////////////////////
+
+////////[app.component.ts]/////////////
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'App works! Does this change?';
+  name;
+}
+/////////////////////////////////////
+
+npm install --save bootstrap
+
+src/app/server/server.component.ts
+
+////////[app.module.ts]////////
+@NgModule({
+  declarations: [
+    AppComponent,
+    ServerComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule
+  ],
+  providers: [
+    
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+/////////////////////////////////
+
+ng generate component servers
