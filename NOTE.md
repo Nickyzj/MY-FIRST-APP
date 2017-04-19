@@ -1,10 +1,17 @@
 # Study notes for Angular 4 
 
-`[sudo] npm install -g @angular/cli`
+## 02 The Baisc
+```
+[sudo] npm install -g @angular/cli
+```
 
-`ng new my-first-app`
+```
+ng new my-first-app
+```
 
-`ng serve`
+```
+ng serve
+```
 
 [http://localhost:4200](http://localhost:4200)
 
@@ -30,7 +37,9 @@ export class AppComponent {
 }
 ```
 
-`npm install --save bootstrap`
+```
+npm install --save bootstrap
+```
 
 ### app.module.ts
 
@@ -56,40 +65,80 @@ export class AppModule { }
 `ng generate component servers`
 
 * select by tag
-`selector: 'app-servers',`
+```
+selector: 'app-servers',
+```
 * select by class
-`selector: '.app-server',`
+```
+selector: '.app-server',
+```
 
-### string-interpolation
+### 12 string-interpolation
 ```html
     <p>Server with ID {{ serverId }} is {{ serverStatus }}</p>
+
+    call a method:
     <p>Call serverStatus(): {{ getServerStatus() }}</p>
 ```
 
-### property binding
+### 13 property binding
 ```html
 ()
-    <button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
+disable the button:
+    <button 
+        class="btn btn-primary" 
+        [disabled]="!allowNewServer" 
+        (click)="onCreateServer()">Add Server</button>
 
-    <input
-        type="text"
-        class="form-control"
-        (input)="onUpdateServerName($event)">
-    <p>{{ serverName }}</p>
-```
-```javacript    
-    onUpdateServerName(event: Event) {
-        this.serverName = (<HTMLInputElement>event.target).value;
-    }
-    
 ```
 
-### two-way binding
+### 14 property binding instead of string inerpolation
+```html
+<p>{{ allowNewServer }}</p>
+OR
+<p [innerText]="allowNewServer"></p>
+```
+
+### 15 event binding
+```javascript
+onCreateServer() {
+    this.serverCreationStatus = "Server was created.";
+}
+```
+
+```html    
+<button 
+  class="btn btn-primary" 
+  [disabled]="!allowNewServer" 
+  (click)="onCreateServer()">Add Server</button>
+<p>{{ serverCreationStatus }}</p>
+```
+
+### 16 event binding passing and using data
+```html
+use $event to fetch data:
+<input
+    type="text"
+    class="form-control"
+    (input)="onUpdateServerName($event)">
+```
+```javascript
+onUpdateServerName(event: Event) {
+    //console.log(event);
+    this.serverName = (<HTMLInputElement>event.target).value;
+}
+```
+
+### 17 two-way binding
 
 ```html
+[()]
 <input
         type="text"
         class="form-control"
         [(ngModel)]="serverName">
     <p>{{ serverName }}</p>
 ```
+
+### 18 combine all forms of data binding
+
