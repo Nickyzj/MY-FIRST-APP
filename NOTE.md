@@ -142,3 +142,79 @@ onUpdateServerName(event: Event) {
 
 ### 18 combine all forms of data binding
 
+## Directives
+
+### 20 __*ngif__
+```javascript
+serverCreated = false;
+
+onCreateServer() {
+    this.serverCreationStatus = "Server was created. Name is " + this.serverName;
+    this.serverCreated = true;
+  }
+```
+```html
+<p *ngIf="serverCreated">Server was created, servername is {{ serverName }}</p>
+```
+
+### 21 __ngif-else__
+```html
+<p *ngIf="serverCreated; else noServer">Server was created, servername is {{ serverName }}</p>
+<ng-template #noServer>
+  <p>No server was created!</p>
+</ng-template>
+```
+
+### 22 __ngStyle__
+
+```html
+<p [ngStyle]="{backgroundColor: getColor()}">Server with ID {{ serverId }} is {{ serverStatus }}</p>
+```
+
+```javascript
+constructor() {
+        this.serverStatus = Math.random() > 0.5 ? 'online': 'offline';
+    }
+
+getColor() {
+        return this.serverStatus === 'online' ? 'green': 'red';
+    }
+```
+
+### 23 __ngClass__
+```html
+<p 
+[ngStyle]="{backgroundColor: getColor()}"
+[ngClass]="{online: serverStatus === 'online'}">
+    Server with ID {{ serverId }} is {{ serverStatus }}
+</p>
+```
+```javascript
+@Component({
+    selector: 'app-server',
+    templateUrl: './server.component.html',
+    styles: [`
+        .online {
+            color: white;
+        }
+    `]
+})
+export class ServerComponent {
+```
+
+### 24 __*ngFor__
+```html
+<app-server *ngFor="let server of servers"></app-server>
+```
+```javascript
+servers = ['TestServer', 'TestServer2 '];
+
+onCreateServer() {
+    this.serverCreationStatus = "Server was created. Name is " + this.serverName;
+    this.servers.push(this.serverName);
+    this.serverCreated = true;
+  }
+```
+
+### 25 ngFor index
+
